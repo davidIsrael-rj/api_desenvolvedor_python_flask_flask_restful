@@ -13,3 +13,13 @@ class Lista_habilidades(Resource):
             mensagem = 'O registro {} ja existe na lista'.format(dados)
             response = {'status':'erro', 'mensagem':mensagem}
         return response
+class Verificando_habilidades(Resource):
+    def get(self):
+        dados = json.loads(request.data)
+        if dados in lista_habilidades:
+            mensagem = 'Habilidade {} encontrado'.format(dados)
+            response = {'status':'sucesso', 'mensagem':mensagem}
+        else:
+            mensagem = 'Habilidade {} não encontrado'.format(dados)
+            response = {'status':'erro', 'mensagem':mensagem}
+        return response
