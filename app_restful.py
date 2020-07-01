@@ -2,7 +2,8 @@ from symbol import return_stmt
 
 from flask import Flask, request
 from flask_restful import Resource, Api
-from habilidades import Habilidades
+from habilidades import  Lista_habilidades
+
 import json
 app = Flask(__name__)
 api = Api(app)
@@ -49,7 +50,8 @@ class ListaDesenvolvedores(Resource):
 
 api.add_resource(Desenvolvedor, '/dev/<int:id>')
 api.add_resource(ListaDesenvolvedores, '/dev/')
-api.add_resource(Habilidades, '/habilidades/')
+api.add_resource(Lista_habilidades, '/habilidades/')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
