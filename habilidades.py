@@ -1,6 +1,34 @@
 from flask_restful import Resource, request
 import json
 lista_habilidades = ['Python', 'Java', 'Flask','PHP']
+class Habilidades(Resource):
+    def get(self,id):
+        try:
+            response = lista_habilidades[id]
+        except IndexError:
+            mensagem = 'Habilidade com ID {} não existe'.format(id)
+            response = {'staus':'erro', 'mensagem':mensagem}
+        except Exception:
+            mensagem = 'Erro desconhecido. procure o administrado da API'
+            response = {'status':'erro', 'mensagem':mensagem}
+        return response
+    def put(self, id):
+        try:
+            response = json.loads(request.data)
+            lista_habilidades[id] = response
+        except IndexError:
+            mensagem = 'Habilidade com ID {} não existe'.format(id)
+            response = {'staus': 'erro', 'mensagem': mensagem}
+        return response
+    def delete(self,id):
+        try:
+            lista_habilidades.pop(id)
+            response ={'status':'sucesso', 'mensagem':'Registro excluído'}
+        except IndexError:
+            mensagem = 'O ID {} não existe'.format(id)
+            response = {'status':'erro', 'mensagem':mensagem}
+        return response
+
 class Lista_habilidades(Resource):
     def get(self):
         return lista_habilidades
